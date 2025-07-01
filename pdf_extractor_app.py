@@ -1,23 +1,23 @@
 import streamlit as st
-import fitz  # PyMuPDF
+import fitz  
 import io
 
-st.title("KE254 PDF Page Extractor")
-st.markdown("Upload a PDF and enter the pages you want to extract (e.g., `1,3,7`)")
+st.title("KE254 Ikuro_PDF Page Extractor")
+st.markdown("Upload your PDF and enter the pages you want to extract (Example 1,3,7)")
 
-uploaded_file = st.file_uploader("Choose a PDF", type="pdf")
+uploaded_file = st.file_uploader("Choose your PDF", type="pdf")
 page_input = st.text_input("Pages to extract (comma-separated):", placeholder="1,3,7")
 
 if uploaded_file and page_input:
     try:
-        # Read the PDF into PyMuPDF
+        # Read the PDF using fitz library
         doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
         total_pages = len(doc)
 
-        # Create new PDF
+        # Create new blank PDF
         new_doc = fitz.open()
 
-        # Parse input
+        # Parse users input
         pages = page_input.split(",")
         for p in pages:
             try:
